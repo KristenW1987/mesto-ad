@@ -1,19 +1,23 @@
 .element__button {
-  max-width: 22px;
-  height: 19px;
-  width: 100%;
-  outline: none;
-  border: none;
-  background: inherit;
-  background-size: contain;
+  background-image: url(../../../images/Vector_heart.svg);
+  background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
-  background-image: url(../../../images/like.svg);
-  margin-right: 5px;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  cursor: pointer;
+  width: 22px;
+  height: 19px;
+  margin: 5px 5px 1px 0;
+}
+.element__button:hover {
+  opacity: 0.6;
+  -webkit-transition: linear 0.2s;
+  -o-transition: linear 0.2s;
+  transition: linear 0.2s;
 }
 
-.element__button:hover {
-  opacity: 0.5;
-  transition: 0.5s;
-  cursor: pointer;
-}

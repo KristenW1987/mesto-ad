@@ -1,26 +1,22 @@
 .profile {
-  position: relative;
-  display: flex;
-  flex-direction: row;
+  margin: 42px auto 0 auto;
   max-width: 880px;
-  margin: 40px auto 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
-
-@media screen and (max-width: 920px) {
+@media screen and (max-width: 670px) {
   .profile {
-    max-width: 720px;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .profile {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
-    margin: 0 auto;
-  }
-}
-
-@media screen and (max-width: 425px) {
-  .profile {
-    max-width: 320px;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
   }
 }

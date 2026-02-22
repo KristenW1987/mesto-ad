@@ -1,31 +1,41 @@
-export default class Popup {
-  constructor(popupSelector) {
-      this._popup = document.querySelector(popupSelector);
-      this._handlerEscapeKey = this._handlerEscapeKey.bind(this);
-  }
+export class Popup {
+    constructor(popupSelector, buttonCloseClass, popupOpenedClass) {
+        this._popupElement = document.querySelector(popupSelector);
+        this._buttonCloseClass=buttonCloseClass;
+        this._popupOpenClass=popupOpenedClass;
+        this._closeByEscape = this._closeByEscape.bind(this);
+    }
 
-  open() {
-      this._popup.classList.add("popup_opened");
-      document.addEventListener("keydown", this._handlerEscapeKey);
-  }
+    openPopup() {
+        this._popupElement.classList.add(this._popupOpenClass);
+        document.addEventListener("keydown", this._closeByEscape);
+    };
 
-  close() {
-      this._popup.classList.remove("popup_opened");
-      document.removeEventListener("keydown", this._handlerEscapeKey);
-  }
+    //добавляем функцию для закрытия попапа
+    closePopup() {
+        this._popupElement.classList.remove(this._popupOpenClass);
+        document.removeEventListener("keydown", this._closeByEscape);
 
-  _handlerEscapeKey(evt) {
-      if (evt.key === "Escape") {
-          this.close();
-      }
-  }
+    };
 
-  setEventListeners() {
-    this._popup.addEventListener("mousedown", (evt) => {
-        if (evt.target.classList.contains("popup_opened") || evt.target.classList.contains("popup__close-button")) {
-            this.close();
+    /**закрытие по esc*/
+    _closeByEscape(evt) {
+        if (evt.key === "Escape") {
+        this.closePopup();
         }
-    });
-}
+    };
 
+    /**слушатель на крестик и работа с оверлей */
+
+    setEventListeners() {
+        this._popupElement.addEventListener('mousedown', (evt) => {
+            if (evt.target.classList.contains(this._buttonCloseClass)) {
+                this.closePopup();
+            };
+            if (evt.target.classList.contains(this._popupOpenClass)) {
+                this.closePopup();
+            };
+           
+        });
+      }
 }

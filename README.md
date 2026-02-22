@@ -1,37 +1,32 @@
-### Project: Mesto
+# Проект: Mesto с JS
 
-**About**
+### Обзор
+* Интро
+* Figma
+* Порядок работы и применение технологий
+* JS script
 
-Interactive project **Mesto** where you can add photos, delete, increase them and put likes, also you can edit profile. There is also validation in all forms.
+**Интро**
 
-**What used in the project?**
+Здесь будет проект о местах, которые остаются в воспоминаниях в путешествиях.
 
-```
-- HTML
-- CSS
-- BEM
-- Adaptive
-- JavaScript
-```
+**Figma**
 
-**How to run?**
+* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+* [Ссылка на макет в Figma с учетом дополненного задания месяца с JS](https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?node-id=0%3A1)
 
-```
-git clone https://github.com/mustafinelnare/mesto.git
-```
+**Порядок работы и применение технологий**
 
-```
-npm install
-```
+В текущей работе применены:
+- адаптивная верстка с помощью @media
+- БЭМ
+- flex
+- grid
+- popup, form
+- открытие, закрытие popup при помощи JS
+- заполнение формы редактирования профиля
+- загрузка, удаление карточек с помощью JS
+- активна кнопка like при помощи JS
 
-```
-npm run build
-```
 
-```
-npm run dev
-```
-
-- [Link to Figma](<https://www.figma.com/file/Uolgj4zyImuek71ihHgboP/Sprint-4---12-(Yandex-Practicum)?type=design&node-id=0%3A1&t=CqADX8S65Y8p1Do4-1>)
-
-- [Link to GitHub Pages](https://mustafinelnare.github.io/mesto/index.html)
+20220721 - создана новая ветка для работы feat/mesto-update!
