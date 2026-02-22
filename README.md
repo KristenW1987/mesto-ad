@@ -1,7 +1,37 @@
-# Проектная работа Mesto
+### Project: Mesto
 
-[https://github.com/ilkaxd/mesto-project-ff](https://github.com/ilkaxd/mesto-project-ff)
+**About**
 
-[https://ilkaxd.github.io/mesto-project-ff/](https://ilkaxd.github.io/mesto-project-ff/)
+Interactive project **Mesto** where you can add photos, delete, increase them and put likes, also you can edit profile. There is also validation in all forms.
 
-[Макет](https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?type=design&mode=design)
+**What used in the project?**
+
+```
+- HTML
+- CSS
+- BEM
+- Adaptive
+- JavaScript
+```
+
+**How to run?**
+
+```
+git clone https://github.com/mustafinelnare/mesto.git
+```
+
+```
+npm install
+```
+
+```
+npm run build
+```
+
+```
+npm run dev
+```
+
+- [Link to Figma](<https://www.figma.com/file/Uolgj4zyImuek71ihHgboP/Sprint-4---12-(Yandex-Practicum)?type=design&node-id=0%3A1&t=CqADX8S65Y8p1Do4-1>)
+
+- [Link to GitHub Pages](https://mustafinelnare.github.io/mesto/index.html)
