@@ -1,77 +1,85 @@
-
 export class Api {
-/** функция по проверке промисов */
-#onResponse = (res) => {
-  return res.ok ? res.json() : Promise.reject(res);
-};
   constructor(config) {
-    this._url = config.url;
-    this._headers = config.headers;
+    this._apiConfig = config
   }
 
-/** 3.загрузка инфо о пользователе с сервера */
-getProfileInfo() {
-  return fetch(`${this._url}/users/me`, {
-    method: "GET",
-    headers: this._headers
-  })
-  .then((res) => this.#onResponse(res));;
-}
-/** 4.загрузка карточек с сервера */
-getAllCards() {
-  return fetch(`${this._url}/cards`, {
-    method: "GET",
-    headers: this._headers
-  })
-  .then((res) => this.#onResponse(res));;
-}
-getAllInfo() {
-  return Promise.all([this.getAllCards(), this.getProfileInfo()]);
-}
+  //функция проверки ответа сервера на запрос
+  _checkResponse(res) {
+    if (res.ok) return res.json();
 
-/** 5.редактирование рофиля */
-editProfileForm(data) {
-    return fetch(`${this._url}/users/me`, {
+    return Promise.reject(`Ошибка: ${res.status}`);
+  }
+
+  //функция получения данных о карточках
+  getInitialCards() {
+    return fetch(`${this._apiConfig.baseURL}/cards`, {
+      headers: this._apiConfig.headers,
+    }).then(this._checkResponse);
+  }
+
+  //функция получения данных пользователя
+  getUserInfo() {
+    return fetch(`${this._apiConfig.baseURL}/users/me`, {
+      headers: this._apiConfig.headers,
+    }).then(this._checkResponse);
+  }
+
+  //функция для получения/редактирования данных профиля
+  patchProfile(name, about) {
+    return fetch(`${this._apiConfig.baseURL}/users/me`, {
       method: "PATCH",
-      headers: this._headers,
-      body: JSON.stringify(data),
-    })
-    .then((res) => this.#onResponse(res));;
+      headers: this._apiConfig.headers,
+      body: JSON.stringify({
+        name: name,
+        about: about,
+      }),
+    }).then(this._checkResponse);
   }
 
-/** 6.добавление новой карточки */
-addCard(data) {
-  return fetch(`${this._url}/cards`, {
-    method: "POST",
-    headers: this._headers,
-    body: JSON.stringify(data),
-  })
-  .then((res) => this.#onResponse(res));;
-}
-
-/** 8.удаление карточки */
-removeCard(cardId) {
-  return fetch(`${this._url}/cards/${cardId}`, {
-    method: "DELETE",
-    headers: this._headers
-  })
-  .then((res) => this.#onResponse(res));;
-}
-/** 9.постановка или удаление лайка */
-changeLikeStatus(dataId, isLike) {
-    return fetch(`${this._url}/cards/likes/${dataId}`, {
-      method: isLike ? "DELETE" : "PUT",
-      headers: this._headers
-    })
-    .then((res) => this.#onResponse(res));;
+  //функция для получения/редактирования фото аватара
+  patchAvatar(avatar) {
+    return fetch(`${this._apiConfig.baseURL}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._apiConfig.headers,
+      body: JSON.stringify({
+        avatar: avatar,
+      }),
+    }).then(this._checkResponse);
   }
-/** 10.обновление аватара пользователя */
-editProfileAvatar(data) {
-  return fetch(`${this._url}/users/me/avatar`, {
-    method: "PATCH",
-    headers: this._headers,
-    body: JSON.stringify(data)
-  })
-  .then((res) => this.#onResponse(res));;
-}
+
+  //функция добавления новой карточки
+  postNewCard(name, link) {
+    return fetch(`${this._apiConfig.baseURL}/cards`, {
+      method: "POST",
+      headers: this._apiConfig.headers,
+      body: JSON.stringify({
+        name: name,
+        link: link,
+      }),
+    }).then(this._checkResponse);
+  }
+
+  //функция удаления новой карточки
+  deleteCard(card) {
+    return fetch(`${this._apiConfig.baseURL}/cards/${card}`, {
+      method: "DELETE",
+      headers: this._apiConfig.headers,
+    }).then(this._checkResponse);
+  }
+
+  //функция для обозначения лайка
+  putLikeOnCard(card) {
+    return fetch(`${this._apiConfig.baseURL}/cards/likes/${card}`, {
+      method: "PUT",
+      headers: this._apiConfig.headers,
+    }).then(this._checkResponse);
+  }
+
+  //функция для удаления лайка
+  deleteLikeOnCard(card) {
+    return fetch(`${this._apiConfig.baseURL}/cards/likes/${card}`, {
+      method: "DELETE",
+      headers: this._apiConfig.headers,
+    }).then(this._checkResponse);
+  }
 }

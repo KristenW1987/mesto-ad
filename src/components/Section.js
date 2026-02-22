@@ -1,24 +1,31 @@
-export default class Section {
-  constructor({ data, renderer }, selector) {
-    this._renderedItems = data;
+export class Section {
+  constructor({ items = [], renderer }, selector) {
+    this._items = items;
+    this.selector = selector;
     this._renderer = renderer;
-    this._container = document.querySelector(selector);
+    this.container = document.querySelector(selector);
   }
 
-/*   addItem(item, userId) {
-    const card = this._renderer(item, userId);
-    this._container.prepend(card);
-  } */
-
-  renderItems(userId) {
-    this._renderedItems.forEach((item) => this._renderer(item, userId));
+  //добавляет все карточки в контейнер
+  renderAll(cards, userId) {
+    this.container.innerHTML = "";
+    cards.forEach((element) => {
+      this.container.append(this._renderer(element, userId));
+    });
   }
 
-  setItem(item) {
-    this._container.prepend(item);
+  //Добавляет дом-элемент в контейнер
+  addItem(element, userId) {
+    this.container.prepend(this._renderer(element, userId));
   }
 
-  setRenderData(data) {
-    this._renderedItems = data;
+  //Добавлят информацию о карточках
+  setItems(info) {
+    return this._items = Array.from(info);
+  }
+
+  //Покажет итемы в консоль
+  showItems() {
+    console.log(this._items);
   }
 }

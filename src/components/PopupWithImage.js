@@ -1,16 +1,15 @@
 import { Popup } from "./Popup.js";
-
 export class PopupWithImage extends Popup {
-    constructor(popupSelector,buttonCloseClass, popupOpenedClass, configPopupImage) {
-        super(popupSelector, buttonCloseClass, popupOpenedClass);
-        this._popupImageElement=this._popupElement.querySelector(configPopupImage.image);
-        this._popupImageTextElement=this._popupElement.querySelector(configPopupImage.text);
-    }
-
-    openPopup(cardInfo) {
-        this._popupImageElement.src = cardInfo.link;
-        this._popupImageElement.alt = cardInfo.name;
-        this._popupImageTextElement.textContent = cardInfo.name;
-        super.openPopup();
-    }
+  constructor(popupSelector) {
+    super(popupSelector);
+    this.image = this.popup.querySelector(".popup__image"); //изображение в попапе, определенном по селектору из Popup
+    this.title = this.popup.querySelector(".popup__title"); //подпись изображения в попапе, определенном по селектору из Popup
+  }
+  //метод для открытия попапа
+  open(name, link) {
+    this.title.textContent = name;
+    this.image.alt = name;
+    this.image.src = link;
+    super.open();
+  }
 }
