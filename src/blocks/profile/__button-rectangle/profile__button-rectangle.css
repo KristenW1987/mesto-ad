@@ -1,0 +1,31 @@
+.profile__button-rectangle {
+  padding: 0;
+  border: 1px solid #fff;
+  border-radius: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  background-image: url(../../../images/Vector_pencil.svg);
+  background-size: 10px 10px;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 15px 0 0 18px;
+}
+.profile__button-rectangle:hover {
+  opacity: 0.6;
+  -webkit-transition: linear 0.3s;
+  -o-transition: linear 0.3s;
+  transition: linear 0.3s;
+}
+@media screen and (max-width: 670px) {
+  .profile__button-rectangle {
+    width: 18px;
+    height: 18px;
+    background-size: 7.5px 7.5px;
+    margin: 8px 0 0 10px;
+  }
+}
