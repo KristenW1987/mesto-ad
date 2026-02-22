@@ -1,85 +1,108 @@
-export class Api {
-  constructor(config) {
-    this._apiConfig = config
-  }
+import baseAvatar from "../images/avatar.jpg";
 
-  //функция проверки ответа сервера на запрос
-  _checkResponse(res) {
-    if (res.ok) return res.json();
+const config = {
+  baseURL: "https://mesto.nomoreparties.co/v1/wff-cohort-2",
+  headers: {
+    authorization: "05b13b30-59e2-48ae-8592-77aaf3426b66",
+    "Content-Type": "application/json",
+  },
+};
 
-    return Promise.reject(`Ошибка: ${res.status}`);
-  }
-
-  //функция получения данных о карточках
-  getInitialCards() {
-    return fetch(`${this._apiConfig.baseURL}/cards`, {
-      headers: this._apiConfig.headers,
-    }).then(this._checkResponse);
-  }
-
-  //функция получения данных пользователя
-  getUserInfo() {
-    return fetch(`${this._apiConfig.baseURL}/users/me`, {
-      headers: this._apiConfig.headers,
-    }).then(this._checkResponse);
-  }
-
-  //функция для получения/редактирования данных профиля
-  patchProfile(name, about) {
-    return fetch(`${this._apiConfig.baseURL}/users/me`, {
-      method: "PATCH",
-      headers: this._apiConfig.headers,
-      body: JSON.stringify({
-        name: name,
-        about: about,
-      }),
-    }).then(this._checkResponse);
-  }
-
-  //функция для получения/редактирования фото аватара
-  patchAvatar(avatar) {
-    return fetch(`${this._apiConfig.baseURL}/users/me/avatar`, {
-      method: "PATCH",
-      headers: this._apiConfig.headers,
-      body: JSON.stringify({
-        avatar: avatar,
-      }),
-    }).then(this._checkResponse);
-  }
-
-  //функция добавления новой карточки
-  postNewCard(name, link) {
-    return fetch(`${this._apiConfig.baseURL}/cards`, {
-      method: "POST",
-      headers: this._apiConfig.headers,
-      body: JSON.stringify({
-        name: name,
-        link: link,
-      }),
-    }).then(this._checkResponse);
-  }
-
-  //функция удаления новой карточки
-  deleteCard(card) {
-    return fetch(`${this._apiConfig.baseURL}/cards/${card}`, {
-      method: "DELETE",
-      headers: this._apiConfig.headers,
-    }).then(this._checkResponse);
-  }
-
-  //функция для обозначения лайка
-  putLikeOnCard(card) {
-    return fetch(`${this._apiConfig.baseURL}/cards/likes/${card}`, {
-      method: "PUT",
-      headers: this._apiConfig.headers,
-    }).then(this._checkResponse);
-  }
-
-  //функция для удаления лайка
-  deleteLikeOnCard(card) {
-    return fetch(`${this._apiConfig.baseURL}/cards/likes/${card}`, {
-      method: "DELETE",
-      headers: this._apiConfig.headers,
-    }).then(this._checkResponse);
-  }
+function getAboutMe() {
+  return fetch(`${config.baseURL}/users/me`, {
+    headers: config.headers,
+  })
+  .then((res) => getResponseData(res));
 }
+
+function getInitialCards() {
+  return fetch(`${config.baseURL}/cards`, {
+    headers: config.headers,
+  })
+  .then((res) => getResponseData(res));
+}
+
+function patchProfile(name, description) {
+  return fetch(`${config.baseURL}/users/me`, {
+    headers: config.headers,
+    method: "PATCH",
+    body: JSON.stringify({
+      name: name,
+      about: description,
+    }),
+  })
+  .then((res) => getResponseData(res));
+}
+
+function postNewCard(name, link) {
+  return fetch(`${config.baseURL}/cards`, {
+    headers: config.headers,
+    method: "POST",
+    body: JSON.stringify({
+      name: name,
+      link: link,
+    }),
+  })
+  .then((res) => getResponseData(res));
+}
+
+function deleteCard(cardId) {
+  return fetch(`${config.baseURL}/cards/${cardId}`, {
+    headers: config.headers,
+    method: "DELETE",
+  })
+  .then((res) => getResponseData(res));
+}
+
+function putLike(cardId) {
+  return fetch(`${config.baseURL}/cards/likes/${cardId}`, {
+    headers: config.headers,
+    method: "PUT",
+  })
+  .then((res) => getResponseData(res));
+}
+
+function deleteLike(cardId) {
+  return fetch(`${config.baseURL}/cards/likes/${cardId}`, {
+    headers: config.headers,
+    method: "DELETE",
+  })
+  .then((res) => getResponseData(res));
+}
+
+function patchAvatar(link) {
+  return fetch(`${config.baseURL}/users/me/avatar`, {
+    headers: config.headers,
+    method: "PATCH",
+    body: JSON.stringify({
+      avatar: link,
+    }),
+  })
+  .then((res) => getResponseData(res));
+}
+
+function getResponseData(res) {
+  if (!res.ok) {
+    return Promise.reject(`Ошибка: ${res.status}`); 
+  }
+  return res.json();
+}
+
+const baseUser = {
+  name: "Жак-Ив Кусто",
+  about: "Исследователь океана",
+  avatar: baseAvatar,
+  _id: "-1",
+};
+
+export {
+  getAboutMe,
+  getInitialCards,
+  patchProfile,
+  postNewCard,
+  deleteCard,
+  putLike,
+  deleteLike,
+  patchAvatar,
+  baseUser
+};
