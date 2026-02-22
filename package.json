@@ -1,7 +1,7 @@
 {
-  "name": "mesto-project",
+  "name": "mesto-project-ff",
   "version": "1.0.0",
-  "description": "* Интро\r * Figma\r * Порядок работы и применение технологий\r * JS script",
+  "description": "[Макет](https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?type=design&mode=design)",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
@@ -9,34 +9,25 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Nardgiz/mesto-project.git"
-  },
-  "author": "",
+  "author": "ilka.xd",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Nardgiz/mesto-project/issues"
-  },
-  "homepage": "https://github.com/Nardgiz/mesto-project#readme",
-  "dependencies": {
-    "core-js": "^3.23.3",
-    "jquery": "^3.6.0"
-  },
   "devDependencies": {
-    "@babel/core": "^7.18.6",
-    "@babel/preset-env": "^7.18.6",
-    "autoprefixer": "^10.4.7",
-    "babel-loader": "^8.2.5",
+    "@babel/core": "^7.23.3",
+    "@babel/preset-env": "^7.23.3",
+    "autoprefixer": "^10.4.16",
+    "babel-loader": "^9.1.3",
     "clean-webpack-plugin": "^4.0.0",
-    "css-loader": "^6.7.1",
-    "cssnano": "^5.1.12",
-    "gh-pages": "^4.0.0",
-    "html-webpack-plugin": "^5.5.0",
-    "mini-css-extract-plugin": "^2.6.1",
-    "postcss-loader": "^7.0.0",
-    "webpack": "^5.73.0",
-    "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^4.9.3"
+    "css-loader": "^6.8.1",
+    "cssnano": "^6.0.1",
+    "gh-pages": "^6.1.0",
+    "html-webpack-plugin": "^5.5.3",
+    "mini-css-extract-plugin": "^2.7.6",
+    "postcss-loader": "^7.3.3",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  },
+  "dependencies": {
+    "core-js": "^3.33.3"
   }
 }

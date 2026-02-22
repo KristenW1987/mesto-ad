@@ -1,77 +1,108 @@
+import baseAvatar from "../images/avatar.jpg";
 
-export class Api {
-/** функция по проверке промисов */
-#onResponse = (res) => {
-  return res.ok ? res.json() : Promise.reject(res);
+const config = {
+  baseURL: "https://mesto.nomoreparties.co/v1/wff-cohort-2",
+  headers: {
+    authorization: "05b13b30-59e2-48ae-8592-77aaf3426b66",
+    "Content-Type": "application/json",
+  },
 };
-  constructor(config) {
-    this._url = config.url;
-    this._headers = config.headers;
-  }
 
-/** 3.загрузка инфо о пользователе с сервера */
-getProfileInfo() {
-  return fetch(`${this._url}/users/me`, {
-    method: "GET",
-    headers: this._headers
+function getAboutMe() {
+  return fetch(`${config.baseURL}/users/me`, {
+    headers: config.headers,
   })
-  .then((res) => this.#onResponse(res));;
-}
-/** 4.загрузка карточек с сервера */
-getAllCards() {
-  return fetch(`${this._url}/cards`, {
-    method: "GET",
-    headers: this._headers
-  })
-  .then((res) => this.#onResponse(res));;
-}
-getAllInfo() {
-  return Promise.all([this.getAllCards(), this.getProfileInfo()]);
+  .then((res) => getResponseData(res));
 }
 
-/** 5.редактирование рофиля */
-editProfileForm(data) {
-    return fetch(`${this._url}/users/me`, {
-      method: "PATCH",
-      headers: this._headers,
-      body: JSON.stringify(data),
-    })
-    .then((res) => this.#onResponse(res));;
-  }
-
-/** 6.добавление новой карточки */
-addCard(data) {
-  return fetch(`${this._url}/cards`, {
-    method: "POST",
-    headers: this._headers,
-    body: JSON.stringify(data),
+function getInitialCards() {
+  return fetch(`${config.baseURL}/cards`, {
+    headers: config.headers,
   })
-  .then((res) => this.#onResponse(res));;
+  .then((res) => getResponseData(res));
 }
 
-/** 8.удаление карточки */
-removeCard(cardId) {
-  return fetch(`${this._url}/cards/${cardId}`, {
-    method: "DELETE",
-    headers: this._headers
-  })
-  .then((res) => this.#onResponse(res));;
-}
-/** 9.постановка или удаление лайка */
-changeLikeStatus(dataId, isLike) {
-    return fetch(`${this._url}/cards/likes/${dataId}`, {
-      method: isLike ? "DELETE" : "PUT",
-      headers: this._headers
-    })
-    .then((res) => this.#onResponse(res));;
-  }
-/** 10.обновление аватара пользователя */
-editProfileAvatar(data) {
-  return fetch(`${this._url}/users/me/avatar`, {
+function patchProfile(name, description) {
+  return fetch(`${config.baseURL}/users/me`, {
+    headers: config.headers,
     method: "PATCH",
-    headers: this._headers,
-    body: JSON.stringify(data)
+    body: JSON.stringify({
+      name: name,
+      about: description,
+    }),
   })
-  .then((res) => this.#onResponse(res));;
+  .then((res) => getResponseData(res));
 }
+
+function postNewCard(name, link) {
+  return fetch(`${config.baseURL}/cards`, {
+    headers: config.headers,
+    method: "POST",
+    body: JSON.stringify({
+      name: name,
+      link: link,
+    }),
+  })
+  .then((res) => getResponseData(res));
 }
+
+function deleteCard(cardId) {
+  return fetch(`${config.baseURL}/cards/${cardId}`, {
+    headers: config.headers,
+    method: "DELETE",
+  })
+  .then((res) => getResponseData(res));
+}
+
+function putLike(cardId) {
+  return fetch(`${config.baseURL}/cards/likes/${cardId}`, {
+    headers: config.headers,
+    method: "PUT",
+  })
+  .then((res) => getResponseData(res));
+}
+
+function deleteLike(cardId) {
+  return fetch(`${config.baseURL}/cards/likes/${cardId}`, {
+    headers: config.headers,
+    method: "DELETE",
+  })
+  .then((res) => getResponseData(res));
+}
+
+function patchAvatar(link) {
+  return fetch(`${config.baseURL}/users/me/avatar`, {
+    headers: config.headers,
+    method: "PATCH",
+    body: JSON.stringify({
+      avatar: link,
+    }),
+  })
+  .then((res) => getResponseData(res));
+}
+
+function getResponseData(res) {
+  if (!res.ok) {
+    return Promise.reject(`Ошибка: ${res.status}`); 
+  }
+  return res.json();
+}
+
+const baseUser = {
+  name: "Жак-Ив Кусто",
+  about: "Исследователь океана",
+  avatar: baseAvatar,
+  _id: "-1",
+};
+
+export {
+  getAboutMe,
+  getInitialCards,
+  patchProfile,
+  postNewCard,
+  deleteCard,
+  putLike,
+  deleteLike,
+  patchAvatar,
+  baseUser
+};

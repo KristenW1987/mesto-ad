@@ -1,5 +1,4 @@
 .content {
-  margin: 0 auto;
-  max-width: 880px;
-  width: 100%;
+  flex-shrink: 0;
+  flex-grow: 1;
 }
