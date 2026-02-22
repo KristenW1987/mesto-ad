@@ -1,10 +1,7 @@
-# react-mesto-api-full
-Репозиторий для приложения проекта `Mesto`, включающий фронтенд и бэкенд части приложения со следующими возможностями: авторизации и регистрации пользователей, операции с карточками и пользователями.
+# Проектная работа Mesto
 
-Ссылка на репозиторий: https://github.com/Kirimarchy/mesto-api-full 
+[https://github.com/ilkaxd/mesto-project-ff](https://github.com/ilkaxd/mesto-project-ff)
 
-IP: 84.252.137.200
+[https://ilkaxd.github.io/mesto-project-ff/](https://ilkaxd.github.io/mesto-project-ff/)
 
-Фронт: https://kmariasha.nomoredomains.sbs
-
-АПИ: https://api.domainname.kmariasha.nomoredomains.sbs
+[Макет](https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?type=design&mode=design)
